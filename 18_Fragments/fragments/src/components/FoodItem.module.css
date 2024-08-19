@@ -1,0 +1,20 @@
+.listgroup
+{
+
+    color: blueviolet;
+    font-size: larger;
+    font-weight: 800;
+    padding-top: 10px;
+
+    
+}
+
+button
+{
+    float: right;
+    
+}
+.active
+{
+    background-color: green;
+}
