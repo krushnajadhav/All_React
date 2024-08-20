@@ -1,5 +1,6 @@
 import { useState } from "react";
 import TodoItem1 from "./TodoItem";
+import { CiCirclePlus } from "react-icons/ci";
 
 function AddTodo(){
 
@@ -53,7 +54,7 @@ function AddTodo(){
         </div>
         <div className="col-lg-4 col-md-4 col-4">
           <button className="btn btn-primary" onClick={handleAddTodo}>
-            Add Todo
+          <CiCirclePlus /> Add Todo
           </button>
         </div>
       </div>
