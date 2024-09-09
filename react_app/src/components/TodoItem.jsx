@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 import { HiCalendar } from "react-icons/hi";
+=======
+
+>>>>>>> origin/main
 function TodoItem1({todo,onDelete})
 {
 
