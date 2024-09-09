@@ -1,3 +1,4 @@
+import { HiCalendar } from "react-icons/hi";
 function TodoItem1({todo,onDelete})
 {
 
@@ -10,7 +11,7 @@ function TodoItem1({todo,onDelete})
             {todo.date}
           </div>
           <div className="col-lg-4 col-md-4 col-4">
-          <button onClick={onDelete} className="btn btn-primary">Delete</button>
+          <button onClick={onDelete} className="btn btn-primary"><HiCalendar />Delete</button>
           </div>
           
         </div>

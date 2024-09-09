@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useState,useRef } from "react";
 import TodoItem1 from "./TodoItem";
+import WelcomeMsg from "./WelcomeMsg";
 
 function AddTodo(){
-
-  //testing
-
+ 
     const [TodoItem,seTodoItem]=useState([]);
 
     const [name, setName] = useState('');
     const [date, setDate] = useState('');
+
+    const click = useRef();
+   
 
     const handleDeleteTodo = (index) => {
       // Filter out the todo item at the specified index
@@ -23,6 +25,8 @@ function AddTodo(){
     
           // Update state with the new todo
           seTodoItem([...TodoItem, newTodo]);
+
+          alert(click.current.value);
     
           // Clear the input fields
           setName('');
@@ -41,6 +45,7 @@ function AddTodo(){
             type="text"
             placeholder="Enter todo here"
             value={name}
+            ref={click}
             onChange={(e) => setName(e.target.value)}
           />
         </div>
@@ -63,6 +68,8 @@ function AddTodo(){
           <TodoItem1 key={index} todo={item} onDelete={()=>handleDeleteTodo(index)}/>
         ))}
       </div>
+
+      <WelcomeMsg list={TodoItem}/>
 
     </div>
   );
