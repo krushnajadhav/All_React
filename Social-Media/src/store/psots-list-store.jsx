@@ -2,30 +2,78 @@ import { useReducer } from "react";
 import { createContext } from "react";
 
 
-const DEFULT_CONTEXT=
+
+export const PostList= createContext(  {
+    postList: [],
+    addPost:()=>{},
+    addInitialPosts:()=>{},
+    deletePost:()=>{},
+
+});
+
+const PostListReducer = (currPostList, action)=>{
+
+    
+    let newPostList = currPostList;
+    if(action.type ==="DELETE_POST")
     {
-        postList: [],
-        addPost:()=>{},
-        deletePost:()=>{},
-    };
 
-
-const PostList= createContext(DEFULT_CONTEXT);
-
-const PostListReducer = (currPostLiast, action)=>{
-    return currPostLiast;
+        newPostList = currPostList.filter((post)=> post.id != action.payload.postId);
+    }
+    else if(action.type ==="ADD_POST")
+    {
+        newPostList = [action.payload,...currPostList];
+    }
+    else if(action.type ==="ADD_INITIAL_POSTS")
+    {
+        newPostList =action.payload.posts;  
+    }
+    return newPostList;
 }
 
 const PostListProvider = ({children})=>{
 
 
-    const [postList, dispatchPostList] = useReducer(PostListReducer,{postList:[],addPost,deletePost});
+    const [postList, dispatchPostList] = useReducer(PostListReducer,[]);
+ 
+    const addPost = (userId,postTitle,postBody,reactions,tags)=>{
 
-    const addPost = (post)=>{
+      
+        dispatchPostList({
+            type:"ADD_POST",
+            payload:{
+                id: Date.now(),
+                title: postTitle,
+                body: postBody,
+                reactions:reactions,
+                userID:userId,
+                tags:tags,
+            },
+        })
+        
 
     }
-    const deletePost = (post)=>{
+
+    const addInitialPosts = (posts)=>{
+
+      
+        dispatchPostList({
+            type:"ADD_INITIAL_POSTS",
+            payload:{
+                posts
+            },
+        })
         
+
+    }
+
+    const deletePost = (postId)=>{
+        dispatchPostList({
+            type:"DELETE_POST",
+            payload:{
+                postId
+            },
+        })
     }
 
 
@@ -34,11 +82,32 @@ const PostListProvider = ({children})=>{
         postList ,
         addPost ,
         deletePost ,
+        addInitialPosts
         }
 
     }> 
         {children}
     </PostList.Provider>
 };
+
+
+// const DEFAULT_POST_LIST=[
+//     {
+//         id: 1,
+//         title: "Going to Mumbai",
+//         body: "hi friends i am going to mumbai for my vacations , Hope you enjoy",
+//         reactions:0,
+//         userID:'user-9',
+//         tags:['vacations','mumbai','enjoy'],
+//     },
+//     {
+//         id: 2,
+//         title: "pass ho bhai",
+//         body: "4 sal ki masti ke bad ho gaye pass",
+//         reactions:15,
+//         userID:'user-12',
+//         tags:['graduating','unbelievable'],
+//     },
+// ];
 
 export default PostListProvider;

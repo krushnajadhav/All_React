@@ -24,7 +24,7 @@ const [selectedTab, setSelectedTab] = useState("Home");
           <Header></Header>
           {selectedTab === 'Home' ? 
           <PostList></PostList> : 
-          <CreatePost></CreatePost>}
+          <CreatePost onSetSelectedTab={setSelectedTab}></CreatePost>}
         
           <Footer></Footer> 
         </div>
