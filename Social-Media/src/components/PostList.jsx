@@ -9,14 +9,22 @@ const PostList =()=>{
     
     const [fetching,setFetching] = useState(false);
 
+    const controller =  new AbortController();
+    const signal = controller.signal;
+
     useEffect(()=>{ 
         setFetching(true);
-        fetch('https://dummyjson.com/posts')
+        fetch('https://dummyjson.com/posts',{ signal })
         .then((res)=> res.json())
         .then((data)=> {
             addInitialPosts(data.posts);
         setFetching(false); 
-        })} ,[]);
+        })
+        
+        return()=>{
+            controller.abort();
+        }
+    },[]);
   
    
    
