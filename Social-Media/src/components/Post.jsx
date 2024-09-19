@@ -3,7 +3,7 @@ import { MdDelete } from "react-icons/md";
 import {PostList} from "../store/psots-list-store";
 const Post = ({post}) =>{
 
-
+  
   const {deletePost}=  useContext(PostList);
 
     return(
@@ -17,7 +17,7 @@ const Post = ({post}) =>{
             <p className="card-text">{post.body}</p>
             {post.tags.map((tag)=> <span className="badge text-bg-primary m-1" key={tag} >{tag}</span>)}
             <div className="alert alert-success mt-2"            role="alert">
-            This post has been reacted by <b>{post.reactions}</b> people
+            This post has been reacted by <b>{post.reactions.likes}</b> people
             </div>
         </div>
     </div>
